@@ -3,6 +3,9 @@ import 'dart:io';
 import 'package:contact_list/helpers/contact_helper.dart';
 import 'package:contact_list/ui/contact_page.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+enum OrderOptions {ORDER_A_Z, ORDER_Z_A}
 
 class HomePage extends StatefulWidget {
   @override
@@ -26,6 +29,21 @@ class _HomePageState extends State<HomePage> {
         title: Text("Contacts"),
         backgroundColor: Colors.red,
         centerTitle: true,
+        actions: <Widget>[
+          PopupMenuButton<OrderOptions>(
+            itemBuilder: (context) => <PopupMenuEntry<OrderOptions>>[
+              const PopupMenuItem<OrderOptions>(
+                child: Text("Order A-Z"),
+                value: OrderOptions.ORDER_A_Z,
+              ),
+              const PopupMenuItem<OrderOptions>(
+                child: Text("Order Z-A"),
+                value: OrderOptions.ORDER_Z_A,
+              )
+            ],
+            onSelected: _orderList,
+          )
+        ],
       ),
       backgroundColor: Colors.white,
       floatingActionButton: FloatingActionButton(
@@ -136,7 +154,10 @@ class _HomePageState extends State<HomePage> {
                           style: TextStyle(color: Colors.red, fontSize: 20.0
                           ),
                         ),
-                        onPressed: (){},
+                        onPressed: (){
+                          launch("tel:${_contacts[index].phone}");
+                          Navigator.pop(context);
+                        },
                       ),
                     ),
                     Padding(
@@ -148,8 +169,8 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         onPressed: (){
-                          _showContactPage(c: _contacts[index]);
                           Navigator.pop(context);
+                          _showContactPage(c: _contacts[index]);
                         },
                       ),
                     ),
@@ -175,5 +196,25 @@ class _HomePageState extends State<HomePage> {
             }, onClosing: () {},
           );
         });
+  }
+
+  void _orderList(OrderOptions value) {
+    switch (value){
+      case OrderOptions.ORDER_A_Z:
+        _contacts.sort((a,b){
+          return a.name.toLowerCase().compareTo(b.name.toLowerCase());
+        });
+        break;
+
+      case OrderOptions.ORDER_Z_A:
+        _contacts.sort((a,b){
+          return b.name.toLowerCase().compareTo(a.name.toLowerCase());
+        });
+        break;
+    }
+
+    setState(() {
+      
+    });
   }
 }
