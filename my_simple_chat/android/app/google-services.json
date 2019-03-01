@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "234410969203",
+    "firebase_url": "https://my-simple-chat-jfsis.firebaseio.com",
+    "project_id": "my-simple-chat-jfsis",
+    "storage_bucket": "my-simple-chat-jfsis.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:234410969203:android:8d0d4dc617f1b302",
+        "android_client_info": {
+          "package_name": "br.com.josiasfabricio.mysimplechat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "234410969203-opidds1kc885vmd9030hn3isnljidmv8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.josiasfabricio.mysimplechat",
+            "certificate_hash": "e36e60a1666ba508eaeb11520da17e5bc4de9fc3"
+          }
+        },
+        {
+          "client_id": "234410969203-24296fuhvvftjtpgl7dpsbj2hvdbbt60.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBT_RuJbOZHIesVZ7j7bB4Is_Ul0djKEkg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "234410969203-24296fuhvvftjtpgl7dpsbj2hvdbbt60.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
