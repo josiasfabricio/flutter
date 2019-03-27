@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:virtual_store/screens/login_screen.dart';
 import 'package:virtual_store/tiles/drawer_tile.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -49,13 +50,19 @@ class CustomDrawer extends StatelessWidget {
                                   fontSize: 18.0, fontWeight: FontWeight.bold)),
                           GestureDetector(
                             child: Text(
-                              "Logon or Sigin >",
+                              "Login or Sign Up >",
                               style: TextStyle(
                                   color: Theme.of(context).primaryColor,
                                   fontSize: 16.0,
                                   fontWeight: FontWeight.bold),
                             ),
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(builder: (context) {
+                                  return LoginScreen();
+                                })
+                              );
+                            },
                           )
                         ],
                       ),
