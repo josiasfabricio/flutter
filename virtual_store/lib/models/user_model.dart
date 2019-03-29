@@ -1,13 +1,20 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:scoped_model/scoped_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:scoped_model/scoped_model.dart';
 import 'package:flutter/material.dart';
 
 class UserModel extends Model {
-  bool isLoading = false;
   FirebaseAuth _auth = FirebaseAuth.instance;
+
   FirebaseUser firebaseUser;
   Map<String, dynamic> userData = Map();
+
+  bool isLoading = false;
+
+  static UserModel of(BuildContext context) =>
+      ScopedModel.of<UserModel>(context);
 
   @override
   void addListener(VoidCallback listener) {
@@ -28,13 +35,12 @@ class UserModel extends Model {
             email: userData["email"], password: pass)
         .then((user) async {
       firebaseUser = user;
-      await _loadCurrentUser();
+
+      await _saveUserData(userData);
 
       onSuccess();
       isLoading = false;
       notifyListeners();
-
-      await _saveUserData(userData);
     }).catchError((e) {
       onFail();
       isLoading = false;
@@ -51,10 +57,11 @@ class UserModel extends Model {
     isLoading = true;
     notifyListeners();
 
-    await _auth
+    _auth
         .signInWithEmailAndPassword(email: email, password: pass)
         .then((user) async {
       firebaseUser = user;
+
       await _loadCurrentUser();
 
       onSuccess();
@@ -68,19 +75,21 @@ class UserModel extends Model {
     });
   }
 
+  void signOut() async {
+    await _auth.signOut();
+
+    userData = Map();
+    firebaseUser = null;
+
+    notifyListeners();
+  }
+
   void recoverPass(String email) {
     _auth.sendPasswordResetEmail(email: email);
   }
 
   bool isLoggedIn() {
     return firebaseUser != null;
-  }
-
-  void logout() async {
-    await _auth.signOut();
-    userData = Map();
-    firebaseUser = null;
-    notifyListeners();
   }
 
   Future<Null> _saveUserData(Map<String, dynamic> userData) async {
@@ -94,14 +103,15 @@ class UserModel extends Model {
   Future<Null> _loadCurrentUser() async {
     if (firebaseUser == null)
       firebaseUser = await _auth.currentUser();
-    else if (userData["name"] == null) {
-      DocumentSnapshot docUser = await Firestore.instance
-          .collection("user")
-          .document(firebaseUser.uid)
-          .get();
-      userData = docUser.data;
+    else {
+      if (userData["name"] == null) {
+        DocumentSnapshot docUser = await Firestore.instance
+            .collection("users")
+            .document(firebaseUser.uid)
+            .get();
+        userData = docUser.data;
+      }
     }
-
     notifyListeners();
   }
 }
