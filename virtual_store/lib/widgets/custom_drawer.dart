@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:scoped_model/scoped_model.dart';
+import 'package:virtual_store/models/user_model.dart';
 import 'package:virtual_store/screens/login_screen.dart';
 import 'package:virtual_store/tiles/drawer_tile.dart';
 
@@ -42,29 +44,37 @@ class CustomDrawer extends StatelessWidget {
                     Positioned(
                       left: 0.0,
                       bottom: 0.0,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text("Hi,",
-                              style: TextStyle(
-                                  fontSize: 18.0, fontWeight: FontWeight.bold)),
-                          GestureDetector(
-                            child: Text(
-                              "Login or Sign Up >",
-                              style: TextStyle(
-                                  color: Theme.of(context).primaryColor,
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            onTap: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(builder: (context) {
-                                  return LoginScreen();
-                                })
-                              );
-                            },
-                          )
-                        ],
+                      child: ScopedModelDescendant<UserModel>(
+                        builder: (context, child, model) {
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                  model.isLoggedIn() ? "Hi, ${model.userData["name"]}" : "",
+                                  style: TextStyle(
+                                      fontSize: 18.0,)),
+                              GestureDetector(
+                                child: Text(
+                                  model.isLoggedIn()
+                                      ? "Logout >"
+                                      : "Login or Sign Up >",
+                                  style: TextStyle(
+                                      color: Theme.of(context).primaryColor,
+                                      fontSize: 16.0,),
+                                ),
+                                onTap: () {
+                                  if (model.isLoggedIn())
+                                    model.logout();
+                                  else
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(builder: (context) {
+                                      return LoginScreen();
+                                    }));
+                                },
+                              )
+                            ],
+                          );
+                        },
                       ),
                     )
                   ],
@@ -74,7 +84,8 @@ class CustomDrawer extends StatelessWidget {
               DrawerTile(Icons.home, "Home", pageController, 0),
               DrawerTile(Icons.list, "Produtcs", pageController, 1),
               DrawerTile(Icons.location_on, "Stores", pageController, 2),
-              DrawerTile(Icons.playlist_add_check, "My Orders", pageController, 3),
+              DrawerTile(
+                  Icons.playlist_add_check, "My Orders", pageController, 3),
             ],
           )
         ],
