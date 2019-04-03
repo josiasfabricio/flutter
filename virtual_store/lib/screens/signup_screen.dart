@@ -95,7 +95,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             Map<String, dynamic> userData = {
                               "name": _nameController.text,
                               "email": _emailController.text,
-                              "address": _addressController
+                              "address": _addressController.text
                             };
                             model.signUp(
                                 userData: userData,
