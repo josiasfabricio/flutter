@@ -8,8 +8,13 @@ class CartModel extends Model {
   UserModel user;
   List<CartProduct> products = [];
   bool isLoading = false;
+  String couponCode;
+  int discountPercentage = 0;
 
-  CartModel(this.user);
+  CartModel(this.user){
+    if(user.isLoggedIn())
+      _loadCartItems();
+  }
 
   static CartModel of(BuildContext context) =>
       ScopedModel.of<CartModel>(context);
@@ -39,5 +44,48 @@ class CartModel extends Model {
     products.remove(cartProduct);
 
     notifyListeners();
+  }
+
+  void decrementProduct(CartProduct cartProduct) {
+    cartProduct.quantity--;
+
+    Firestore.instance
+        .collection("users")
+        .document(user.firebaseUser.uid)
+        .collection("cart")
+        .document(cartProduct.cid)
+        .updateData(cartProduct.toMap());
+
+    notifyListeners();
+  }
+
+  void incrementProduct(CartProduct cartProduct) {
+    cartProduct.quantity++;
+
+    Firestore.instance
+        .collection("users")
+        .document(user.firebaseUser.uid)
+        .collection("cart")
+        .document(cartProduct.cid)
+        .updateData(cartProduct.toMap());
+
+    notifyListeners();
+  }
+
+  void _loadCartItems() async {
+    QuerySnapshot query = await Firestore.instance
+        .collection("users")
+        .document(user.firebaseUser.uid)
+        .collection("cart")
+        .getDocuments();
+    
+    products = query.documents.map((doc) => CartProduct.fromDocument(doc)).toList();
+
+    notifyListeners();
+  }
+
+  void setCoupon(String couponCode, int discountPercentage){
+    this.couponCode = couponCode;
+    this.discountPercentage = discountPercentage;
   }
 }
