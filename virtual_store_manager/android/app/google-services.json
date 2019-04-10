@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "678651248037",
+    "firebase_url": "https://virtual-store-jfsis.firebaseio.com",
+    "project_id": "virtual-store-jfsis",
+    "storage_bucket": "virtual-store-jfsis.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:678651248037:android:e1e7de403d1b08ca",
+        "android_client_info": {
+          "package_name": "br.com.josiasfabricio.virtualstore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "678651248037-hhdtkbsed803udj8js8rofte0588pdlu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAb_ezk7dfthsVoKhVykbkB6oqiC6j-1mA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "678651248037-hhdtkbsed803udj8js8rofte0588pdlu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "678651248037-ffk6ln96mmegjiev60ugghsis2u2dc9c.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "br.com.josiasfabricio.virtualStore"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:678651248037:android:b675dd9826f8408e",
+        "android_client_info": {
+          "package_name": "br.com.josiasfabricio.virtualstoremanager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "678651248037-hhdtkbsed803udj8js8rofte0588pdlu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAb_ezk7dfthsVoKhVykbkB6oqiC6j-1mA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "678651248037-hhdtkbsed803udj8js8rofte0588pdlu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "678651248037-ffk6ln96mmegjiev60ugghsis2u2dc9c.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "br.com.josiasfabricio.virtualStore"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
