@@ -14,7 +14,7 @@ class DiscountCard extends StatelessWidget {
           style:
               TextStyle(fontWeight: FontWeight.w500, color: Colors.grey[700]),
         ),
-        leading: Icon(Icons.card_giftcard),
+        leading: Icon(Icons.card_giftcard,),
         trailing: Icon(Icons.add),
         children: <Widget>[
           Padding(

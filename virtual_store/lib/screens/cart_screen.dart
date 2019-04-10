@@ -3,6 +3,7 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:virtual_store/models/cart_model.dart';
 import 'package:virtual_store/models/user_model.dart';
 import 'package:virtual_store/screens/login_screen.dart';
+import 'package:virtual_store/screens/order_screen.dart';
 import 'package:virtual_store/tiles/cart_tile.dart';
 import 'package:virtual_store/widgets/cart_price.dart';
 import 'package:virtual_store/widgets/discount_card.dart';
@@ -73,7 +74,7 @@ class CartScreen extends StatelessWidget {
               ],
             ),
           );
-        } else if (model.products == null) {
+        } else if (model.products == null || model.products.length == 0) {
           return Center(
             child: Text(
               "No product in the cart",
@@ -96,6 +97,9 @@ class CartScreen extends StatelessWidget {
               ShipCard(),
               CartPrice(() async {
                 String orderId = await model.finishOder();
+                if (orderId != null)
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => OrderScreen(orderId)));
               })
             ],
           );

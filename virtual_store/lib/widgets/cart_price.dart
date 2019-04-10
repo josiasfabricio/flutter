@@ -54,6 +54,9 @@ class CartPrice extends StatelessWidget {
                   ],
                 ),
                 Divider(),
+                SizedBox(
+                  height: 12.0,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[

@@ -29,7 +29,7 @@ class CustomDrawer extends StatelessWidget {
               Container(
                 margin: EdgeInsets.only(bottom: 8.0),
                 padding: EdgeInsets.fromLTRB(0.0, 16.0, 16.0, 8.0),
-                height: 170.0,
+                height: 130.0,
                 child: Stack(
                   children: <Widget>[
                     Positioned(
@@ -49,11 +49,14 @@ class CustomDrawer extends StatelessWidget {
                           return Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Text(
-                                  "hi, ${(model.userData != null && model.isLoggedIn()) ? model.userData["name"] : ""}",
-                                  style: TextStyle(
-                                    fontSize: 18.0,
-                                  )),
+                              (model.userData != null && model.isLoggedIn())
+                                  ? Text("Hi, ${model.userData["name"]}",
+                                      style: TextStyle(
+                                        fontSize: 18.0,
+                                      ))
+                                  : SizedBox(
+                                      height: 0.0,
+                                    ),
                               GestureDetector(
                                 child: Text(
                                   model.isLoggedIn()
@@ -86,8 +89,7 @@ class CustomDrawer extends StatelessWidget {
               DrawerTile(Icons.home, "Home", pageController, 0),
               DrawerTile(Icons.list, "Produtcs", pageController, 1),
               DrawerTile(Icons.location_on, "Stores", pageController, 2),
-              DrawerTile(
-                  Icons.playlist_add_check, "My Orders", pageController, 3),
+              DrawerTile(Icons.playlist_add_check, "My Orders", pageController, 3),
             ],
           )
         ],

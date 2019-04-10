@@ -71,19 +71,6 @@ class CartModel extends Model {
     notifyListeners();
   }
 
-  void _loadCartItems() async {
-    QuerySnapshot query = await Firestore.instance
-        .collection("users")
-        .document(user.firebaseUser.uid)
-        .collection("cart")
-        .getDocuments();
-
-    products =
-        query.documents.map((doc) => CartProduct.fromDocument(doc)).toList();
-
-    notifyListeners();
-  }
-
   void setCoupon(String couponCode, int discountPercentage) {
     this.couponCode = couponCode;
     this.discountPercentage = discountPercentage;
@@ -132,7 +119,7 @@ class CartModel extends Model {
     });
 
     Firestore.instance
-        .collection("user")
+        .collection("users")
         .document(user.firebaseUser.uid)
         .collection("orders")
         .document(referenceOder.documentID)
@@ -155,5 +142,18 @@ class CartModel extends Model {
     notifyListeners();
 
     return referenceOder.documentID;
+  }
+
+  void _loadCartItems() async {
+    QuerySnapshot query = await Firestore.instance
+        .collection("users")
+        .document(user.firebaseUser.uid)
+        .collection("cart")
+        .getDocuments();
+
+    products =
+        query.documents.map((doc) => CartProduct.fromDocument(doc)).toList();
+
+    notifyListeners();
   }
 }

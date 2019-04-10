@@ -3,12 +3,11 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:virtual_store/models/cart_model.dart';
 import 'package:virtual_store/models/user_model.dart';
 import 'package:virtual_store/screens/home_screen.dart';
-import 'package:virtual_store/screens/login_screen.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     return ScopedModel<UserModel>(
