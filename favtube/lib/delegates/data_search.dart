@@ -41,11 +41,11 @@ class DataSearch extends SearchDelegate<String> {
       return FutureBuilder<List>(
         future: suggestions(query),
         builder: (context, snapshot) {
-          if (!snapshot.hasData)
+          if (!snapshot.hasData) {
             return Center(
               child: CircularProgressIndicator(),
             );
-          else
+          } else {
             return ListView.builder(
               itemBuilder: (context, index) {
                 return ListTile(
@@ -58,6 +58,7 @@ class DataSearch extends SearchDelegate<String> {
               },
               itemCount: snapshot.data.length,
             );
+          }
         },
       );
   }
