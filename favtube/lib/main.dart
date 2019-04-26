@@ -1,3 +1,4 @@
+import 'package:favtube/blocs/favorite_bloc.dart';
 import 'package:favtube/blocs/videos_bloc.dart';
 import 'package:favtube/screens/home.dart';
 import 'package:flutter/material.dart';
@@ -10,14 +11,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       bloc: VideosBloc(),
-      child: MaterialApp(
-        title: 'FavTube',
-        theme: ThemeData(
-          primaryColor: Colors.grey,
-        ),
-        home: Home(),
-        debugShowCheckedModeBanner: false,
-      ),
+      child: BlocProvider(
+          bloc: FavoriteBloc(),
+          child: MaterialApp(
+            title: 'FavTube',
+            theme: ThemeData(
+              primaryColor: Colors.grey,
+            ),
+            home: Home(),
+            debugShowCheckedModeBanner: false,
+          )),
     );
   }
 }
